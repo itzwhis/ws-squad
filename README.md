@@ -1,9 +1,9 @@
 🚀 [New Release](#)
 
-# ws-squad
+
 
 <p align="center">
-  Developed by <b>WS Scripts</b><br>
+  Developed by <b>ws-squadsystem </b><br>
   <i>Premium RedM & FiveM scripts — cowboys by day, coders by night.</i>
 </p>
 
