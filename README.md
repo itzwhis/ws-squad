@@ -10,7 +10,7 @@
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Discord-Join%20WS%20Scripts-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord"></a>
   <a href="#"><img src="https://img.shields.io/badge/framework-rsg--core-blue?style=flat-square" alt="Framework"></a>
-  <a href="#"><img src="https://img.shields.io/badge/version-1.0.6-brightgreen?style=flat-square" alt="Version"></a>
+  <a href="#"><img src="https://img.shields.io/badge/version-1.0.0-brightgreen?style=flat-square" alt="Version"></a>
   <a href="#"><img src="https://img.shields.io/badge/Lua-5.4-black?style=flat-square" alt="Lua"></a>
 </p>
 
