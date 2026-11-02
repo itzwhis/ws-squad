@@ -4,7 +4,7 @@
 
 <p align="center">
   <b>ws-squadsystem </b><br>
-<i>Elite PvP RedM scripts — dominate the frontier together.</i>
+<i>Elite PvP RedM scripts .</i>
 </p>
 
 <p align="center">
