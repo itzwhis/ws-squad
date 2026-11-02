@@ -4,7 +4,7 @@
 
 <p align="center">
   <b>ws-squadsystem </b><br>
-  <i>Premium RedM & FiveM scripts — cowboys by day, coders by night.</i>
+<i>Elite PvP RedM scripts — dominate the frontier together.</i>
 </p>
 
 <p align="center">
