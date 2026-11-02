@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <title>ws-squad | WS Scripts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Lora:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ===== MENU ===== -->
+<div id="menu" class="hidden">
+    <div class="poster">
+      <div class="nail tl"></div><div class="nail tr"></div><div class="nail bl"></div><div class="nail br"></div>
+      <button class="btn-close" id="btnClose" data-i18n-title="ui_close" title="ESC">✕</button>
+      <header>
+        <img class="logo" src="logo.png" alt="RedWest PVP" draggable="false" />
+        <div class="title-wrap">
+          <h1 data-i18n="ui_title">Squad System</h1>
+        </div>
+      </header>
+      
+      <!-- Invite banner -->
+      <div id="inviteBox" class="invite hidden">
+        <span id="inviteText"></span>
+        <div class="row">
+          <button class="btn gold" id="btnAccept" data-i18n="ui_accept">Accept</button>
+          <button class="btn dark" id="btnDecline" data-i18n="ui_decline">Decline</button>
+        </div>
+      </div>
+
+      <!-- HOME: all squads -->
+      <section id="viewBrowse">
+        <h2 data-i18n="ui_all_squads">All Squads</h2>
+        <p class="hint" id="listHint"></p>
+        <div id="squadList" class="squad-list"></div>
+        <button class="btn gold full" id="btnShowCreate" data-i18n="ui_create_btn">+ Create Squad</button>
+      </section>
+
+      <!-- CREATE view -->
+      <section id="viewCreate" class="hidden">
+        <button class="btn dark back" id="btnBackCreate" data-i18n="ui_back">&larr; All Squads</button>
+        <div class="card">
+          <h3 data-i18n="ui_create_title">Create Squad</h3>
+          <label for="inName" data-i18n="ui_squad_name">Squad name</label>
+          <input id="inName" maxlength="20" autocomplete="off" />
+          <label for="inCode" data-i18n="ui_pass_code">Secret pass code</label>
+          <input id="inCode" type="password" maxlength="12" autocomplete="off" />
+          <label for="inMax" id="maxLbl" data-i18n="ui_max_members">Max members (1 - 10)</label>
+          <input id="inMax" type="number" min="1" max="10" value="6" />
+          <button class="btn gold full" id="btnCreate" data-i18n="ui_create">Create</button>
+        </div>
+      </section>
+
+      <!-- JOIN view (after clicking a squad) -->
+      <section id="viewJoin" class="hidden">
+        <button class="btn dark back" id="btnBackJoin" data-i18n="ui_back">&larr; All Squads</button>
+        <div class="card">
+          <h3 data-i18n="ui_join_title">Join Squad</h3>
+          <p class="hint" data-i18n="ui_join_hint">Enter the secret pass code to join</p>
+          <div class="selected" id="selectedSquad">—</div>
+          <input id="inJoinCode" type="password" maxlength="12" autocomplete="off" data-i18n-ph="ui_pass_ph" placeholder="Pass code" />
+          <button class="btn gold full" id="btnJoin" data-i18n="ui_join">Join</button>
+        </div>
+      </section>
+
+      <!-- Squad management panel (own squad only) -->
+      <section id="viewSquad" class="hidden">
+        <div class="toolbar leader-only">
+          <button class="btn gold" id="btnOpenInvite" data-i18n="ui_invite_player">Invite Player</button>
+          <button class="btn gold" id="btnOpenCode" data-i18n="ui_change_code">Change Pass Code</button>
+        </div>
+        <button class="btn dark back" id="btnBack" data-i18n="ui_back">&larr; All Squads</button>
+        <div class="squad-head">
+          <h2 id="mySquadName"></h2>
+          <span class="badge" id="mySquadCount"></span>
+        </div>
+        <p class="hint leader-only" data-i18n="ui_kick_hint">Click a member to kick them from the squad</p>
+        <div id="memberList" class="member-list"></div>
+
+        <div class="row actions">
+          <button class="btn dark" id="btnLeave" data-i18n="ui_leave">Leave Squad</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- small popups -->
+    <div id="modalInvite" class="modal hidden">
+      <div class="modal-box">
+        <h3 data-i18n="ui_invite_player">Invite Player</h3>
+        <label for="inInviteId" data-i18n="ui_player_id">Player ID</label>
+        <input id="inInviteId" type="number" min="1" data-i18n-ph="ui_player_id" placeholder="Player ID" />
+        <div class="row modal-actions">
+          <button class="btn dark" data-close-modal data-i18n="ui_cancel">Cancel</button>
+          <button class="btn gold" id="btnInvite" data-i18n="ui_invite">Invite</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalLeave" class="modal hidden">
+      <div class="modal-box">
+        <h3 data-i18n="ui_leave">Leave Squad</h3>
+        <p class="hint" data-i18n="ui_confirm_leave"></p>
+        <div class="row modal-actions">
+          <button class="btn dark" data-close-modal data-i18n="ui_cancel">Cancel</button>
+          <button class="btn gold" id="btnConfirmLeave" data-i18n="ui_confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalCode" class="modal hidden">
+      <div class="modal-box">
+        <h3 data-i18n="ui_change_code">Change Pass Code</h3>
+        <label for="inNewCode" data-i18n="ui_new_code">New pass code</label>
+        <input id="inNewCode" type="password" maxlength="12" autocomplete="off" data-i18n-ph="ui_new_code_ph" placeholder="New pass code" />
+        <div class="row modal-actions">
+          <button class="btn dark" data-close-modal data-i18n="ui_cancel">Cancel</button>
+          <button class="btn gold" id="btnChangeCode" data-i18n="ui_update">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HUD ===== -->
+  <div id="hud" class="hidden">
+    <div class="hud-title" id="hudTitle"></div>
+    <div id="hudMembers"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
